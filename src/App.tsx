@@ -202,9 +202,6 @@ function App() {
 
         {/* Footer */}
         <footer className="text-white/70 font-mono bg-black/50 p-4 border border-green-400 rounded">
-          <p className="text-green-400">⚠️ WARNING: This is a parody website ⚠️</p>
-          <p className="mt-2 text-yellow-400">Built with React, Vite, Tailwind CSS v4, and Shadcn/ui</p>
-          <p className="mt-2 text-red-400">No actual hacks provided - just memes! 🚀</p>
         </footer>
       </div>
     </div>

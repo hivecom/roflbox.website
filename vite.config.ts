@@ -10,5 +10,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: '/roflbox.website/',
+  // For a custom domain (roflbox.website) assets should be served from root.
+  // Using '/roflbox.website/' caused requests like https://roflbox.website/roflbox.website/assets/*.js
+  // which GitHub Pages returns as HTML 404 -> MIME type text/html -> blocked.
+  base: '/',
 })
