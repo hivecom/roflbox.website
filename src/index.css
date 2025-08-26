@@ -117,3 +117,211 @@
   background: linear-gradient(45deg, #00ff00, #ff0000);
   border-radius: 6px;
 }
+
+/* WORST POSSIBLE ANIMATIONS AND EFFECTS */
+@keyframes wobble-crazy {
+  0% { transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1); }
+  25% { transform: perspective(400px) rotateX(15deg) rotateY(-10deg) scale(1.1); }
+  50% { transform: perspective(400px) rotateX(-15deg) rotateY(10deg) scale(0.9); }
+  75% { transform: perspective(400px) rotateX(10deg) rotateY(-15deg) scale(1.05); }
+  100% { transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1); }
+}
+
+@keyframes rainbow-spin {
+  0% { 
+    transform: rotate(0deg) scale(1); 
+    filter: hue-rotate(0deg) saturate(2) brightness(1.2);
+  }
+  25% { 
+    transform: rotate(90deg) scale(1.2); 
+    filter: hue-rotate(90deg) saturate(3) brightness(1.5);
+  }
+  50% { 
+    transform: rotate(180deg) scale(0.8); 
+    filter: hue-rotate(180deg) saturate(2) brightness(1.8);
+  }
+  75% { 
+    transform: rotate(270deg) scale(1.1); 
+    filter: hue-rotate(270deg) saturate(4) brightness(1.3);
+  }
+  100% { 
+    transform: rotate(360deg) scale(1); 
+    filter: hue-rotate(360deg) saturate(2) brightness(1.2);
+  }
+}
+
+@keyframes fly-around {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(100px, -50px) rotate(90deg); }
+  50% { transform: translate(-50px, 100px) rotate(180deg); }
+  75% { transform: translate(-100px, -25px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes shake-violent {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-20px) rotateZ(-5deg); }
+  20% { transform: translateX(20px) rotateZ(5deg); }
+  30% { transform: translateX(-15px) rotateZ(-3deg); }
+  40% { transform: translateX(15px) rotateZ(3deg); }
+  50% { transform: translateX(-10px) rotateZ(-2deg); }
+  60% { transform: translateX(10px) rotateZ(2deg); }
+  70% { transform: translateX(-5px) rotateZ(-1deg); }
+  80% { transform: translateX(5px) rotateZ(1deg); }
+  90% { transform: translateX(-2px); }
+}
+
+@keyframes blink-seizure {
+  0%, 50% { opacity: 1; background: #ff0000; }
+  25%, 75% { opacity: 0; background: #00ff00; }
+}
+
+@keyframes float-diagonal {
+  0%, 100% { transform: translate(0, 0) rotateZ(0deg); }
+  25% { transform: translate(200px, -100px) rotateZ(90deg); }
+  50% { transform: translate(400px, 0) rotateZ(180deg); }
+  75% { transform: translate(200px, 100px) rotateZ(270deg); }
+}
+
+@keyframes text-crazy {
+  0% { 
+    font-size: 1em; 
+    letter-spacing: 0; 
+    transform: skew(0deg);
+    color: #ff0000;
+  }
+  25% { 
+    font-size: 1.5em; 
+    letter-spacing: 5px; 
+    transform: skew(10deg);
+    color: #00ff00;
+  }
+  50% { 
+    font-size: 0.8em; 
+    letter-spacing: -2px; 
+    transform: skew(-15deg);
+    color: #0000ff;
+  }
+  75% { 
+    font-size: 2em; 
+    letter-spacing: 8px; 
+    transform: skew(5deg);
+    color: #ff00ff;
+  }
+  100% { 
+    font-size: 1em; 
+    letter-spacing: 0; 
+    transform: skew(0deg);
+    color: #ff0000;
+  }
+}
+
+/* Terrible animation classes */
+.animate-wobble-crazy {
+  animation: wobble-crazy 0.8s ease-in-out infinite;
+}
+
+.animate-rainbow-spin {
+  animation: rainbow-spin 1.5s linear infinite;
+}
+
+.animate-fly-around {
+  animation: fly-around 3s ease-in-out infinite;
+}
+
+.animate-shake-violent {
+  animation: shake-violent 0.5s ease-in-out infinite;
+}
+
+.animate-blink-seizure {
+  animation: blink-seizure 0.3s linear infinite;
+}
+
+.animate-float-diagonal {
+  animation: float-diagonal 4s ease-in-out infinite;
+}
+
+.animate-text-crazy {
+  animation: text-crazy 2s ease-in-out infinite;
+}
+
+/* Horrible hover effects */
+.hover-explode:hover {
+  transform: scale(2) rotate(720deg) skew(45deg) !important;
+  transition: all 0.1s ease-in !important;
+  z-index: 9999 !important;
+  filter: hue-rotate(180deg) saturate(3) brightness(2) !important;
+}
+
+.hover-shrink:hover {
+  transform: scale(0.1) rotate(-360deg) !important;
+  transition: all 2s ease-out !important;
+}
+
+.hover-fly:hover {
+  transform: translate(300px, -200px) rotate(1080deg) scale(1.5) !important;
+  transition: all 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+}
+
+/* 3D perspective madness */
+.perspective-crazy {
+  perspective: 100px;
+  transform-style: preserve-3d;
+}
+
+.rotate-3d-crazy {
+  transform: rotateX(45deg) rotateY(45deg) rotateZ(45deg);
+  transition: transform 0.3s ease;
+}
+
+.rotate-3d-crazy:hover {
+  transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg) scale(1.5);
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ADDITIONAL TERRIBLE EFFECTS */
+@keyframes seizure-warning {
+  0% { background: #ff0000; transform: scale(1) rotate(0deg); }
+  10% { background: #00ff00; transform: scale(1.2) rotate(36deg); }
+  20% { background: #0000ff; transform: scale(0.8) rotate(72deg); }
+  30% { background: #ffff00; transform: scale(1.1) rotate(108deg); }
+  40% { background: #ff00ff; transform: scale(0.9) rotate(144deg); }
+  50% { background: #00ffff; transform: scale(1.3) rotate(180deg); }
+  60% { background: #ffffff; transform: scale(0.7) rotate(216deg); }
+  70% { background: #000000; transform: scale(1.15) rotate(252deg); }
+  80% { background: #ff8000; transform: scale(0.85) rotate(288deg); }
+  90% { background: #8000ff; transform: scale(1.25) rotate(324deg); }
+  100% { background: #ff0000; transform: scale(1) rotate(360deg); }
+}
+
+/* Body modifications for maximum chaos */
+body {
+  overflow-x: auto !important;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><text y="18" font-size="20">💀</text></svg>'), auto !important;
+}
+
+/* Selection styling */
+::selection {
+  background: #ff00ff !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 10px #ffffff !important;
+}
+
+/* Random element positioning chaos */
+.random-absolute {
+  position: absolute !important;
+  z-index: 999 !important;
+}
+
+/* Text overflow chaos */
+.overflow-chaos {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-all !important;
+}
