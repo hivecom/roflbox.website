@@ -6,14 +6,14 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-400 via-teal-500 to-purple-900 flex flex-col items-center justify-center p-4">
       <div className="max-w-4xl mx-auto text-center">
         {/* Hero Section */}
         <div className="mb-12">
-          <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4">
+          <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-200 to-white mb-4">
             ROFLBOX
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+          <p className="text-xl md:text-2xl text-white/80 mb-8">
             GET GOOD GET ROFLBOX
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
@@ -83,7 +83,7 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="text-muted-foreground">
+        <footer className="text-white/70">
           <p>Built with React, Vite, Tailwind CSS v4, and Shadcn/ui</p>
           <p className="mt-2">Ready for GitHub Pages deployment! 🚀</p>
         </footer>
