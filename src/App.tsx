@@ -57,7 +57,7 @@ function App() {
   }, [])
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-emerald-400 via-teal-500 to-purple-900 flex flex-col items-center justify-start p-4 relative ${chaosClass('perspective-crazy')}`} style={{overflow: 'visible'}}>
+    <div className={`min-h-screen bg-gradient-to-br from-fuchsia-500 via-lime-400 to-orange-600 flex flex-col items-center justify-start p-4 relative ${chaosClass('perspective-crazy')}`} style={{overflow: 'visible'}}>
       
       {/* FLOATING CHAOS - ABSOLUTE POSITIONED MADNESS - Only in chaos mode */}
       {chaosMode && (
@@ -218,7 +218,7 @@ function App() {
         </Card>
 
         {/* Ridiculous Counter - Conditional chaos */}
-        <Card className={`max-w-md mx-auto mb-8 border-4 border-rainbow animate-pulse ${chaosClass('hover-explode rotate-3d-crazy animate-float-diagonal')}`} style={{background: 'linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ffff00)', transform: chaosMode ? 'skew(-5deg) perspective(200px) rotateX(15deg)' : 'skew(-2deg)'}}>
+        <Card className={`max-w-md mx-auto mb-8 border-4 border-rainbow animate-pulse ${chaosClass('hover-explode rotate-3d-crazy animate-float-diagonal')}`} style={{background: 'linear-gradient(45deg, #ff00ff, #00ff00, #ff8000, #ffff00)', transform: chaosMode ? 'skew(-5deg) perspective(200px) rotateX(15deg)' : 'skew(-2deg)'}}>
           <CardHeader className={chaosClass('animate-shake-violent')}>
             <CardTitle className={`text-2xl font-mono text-red-500 ${chaosClass('animate-blink-seizure hover-fly')}`} style={{fontFamily: 'Comic Sans MS, cursive', textShadow: '0 0 10px #ff0000, 0 0 20px #ff0000'}}>
               💥 SKILL COUNTER 3000™ 💥
