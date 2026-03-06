@@ -18,7 +18,7 @@ export function BackgroundSwitcher({ currentThemeId, onThemeChange }: Background
         aria-label="Open theme picker"
         aria-expanded={open}
         title="Change background theme"
-        className="font-mono text-xs bg-black/70 border border-green-400 text-green-400 hover:bg-green-900/50 hover:text-green-300 focus-visible:ring-green-400 backdrop-blur-sm"
+        className="font-mono text-xs bg-black/80 border border-white/30 text-white/80 hover:bg-black/90 hover:text-white focus-visible:ring-white/50 backdrop-blur-sm"
       >
         🎨 BG
       </Button>
@@ -27,10 +27,10 @@ export function BackgroundSwitcher({ currentThemeId, onThemeChange }: Background
         <div
           role="dialog"
           aria-label="Background theme picker"
-          className="bg-black/90 border border-green-400 rounded-lg p-3 backdrop-blur-sm shadow-lg shadow-black/50"
+          className="bg-black/90 border border-white/20 rounded-lg p-3 backdrop-blur-sm shadow-lg shadow-black/50"
           style={{ minWidth: '180px' }}
         >
-          <div className="text-green-400 font-mono text-xs mb-2 font-bold tracking-wider">
+          <div className="text-white/60 font-mono text-xs mb-2 font-bold tracking-wider">
             SELECT THEME:
           </div>
           <div className="flex flex-col gap-1.5">
@@ -41,10 +41,10 @@ export function BackgroundSwitcher({ currentThemeId, onThemeChange }: Background
                   onThemeChange(theme)
                   setOpen(false)
                 }}
-                className={`flex items-center gap-2 w-full text-left px-2 py-1.5 rounded text-xs font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 ${
+                className={`flex items-center gap-2 w-full text-left px-2 py-1.5 rounded text-xs font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
                   currentThemeId === theme.id
-                    ? 'bg-green-900/60 text-green-300 border border-green-500'
-                    : 'text-green-400/80 hover:bg-green-900/30 hover:text-green-300 border border-transparent'
+                    ? 'bg-white/20 text-white border border-white/30'
+                    : 'text-white/70 hover:bg-white/10 hover:text-white border border-transparent'
                 }`}
               >
                 {/* Swatch */}
@@ -55,15 +55,15 @@ export function BackgroundSwitcher({ currentThemeId, onThemeChange }: Background
                 />
                 <span>{theme.label}</span>
                 {currentThemeId === theme.id && (
-                  <span className="ml-auto text-green-400" aria-label="(selected)">✓</span>
+                  <span className="ml-auto text-white/80" aria-label="(selected)">✓</span>
                 )}
               </button>
             ))}
           </div>
-          <div className="mt-2 pt-2 border-t border-green-900">
+          <div className="mt-2 pt-2 border-t border-white/10">
             <button
               onClick={() => setOpen(false)}
-              className="text-green-400/50 text-xs font-mono hover:text-green-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-400 w-full text-right"
+              className="text-white/40 text-xs font-mono hover:text-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 w-full text-right"
             >
               [close]
             </button>
