@@ -2,15 +2,32 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { BG_THEMES, type BgTheme } from '@/lib/themes'
 import { useTutorial } from '@/lib/tutorial'
+import { type ColorModePreference, type ColorMode } from '@/lib/colorMode'
 
 interface BackgroundSwitcherProps {
   currentThemeId: string
   onThemeChange: (theme: BgTheme) => void
+  colorModePreference: ColorModePreference
+  resolvedColorMode: ColorMode
+  onColorModeChange: (pref: ColorModePreference) => void
 }
 
-export function BackgroundSwitcher({ currentThemeId, onThemeChange }: BackgroundSwitcherProps) {
+export function BackgroundSwitcher({
+  currentThemeId,
+  onThemeChange,
+  colorModePreference,
+  resolvedColorMode,
+  onColorModeChange,
+}: BackgroundSwitcherProps) {
   const [open, setOpen] = useState(false)
   const { start: startTutorial, completed: tutorialCompleted } = useTutorial()
+
+  const isDark = resolvedColorMode === 'dark'
+
+  const handleDarkModeToggle = () => {
+    // Clicking the toggle sets an explicit light/dark preference (overrides system).
+    onColorModeChange(isDark ? 'light' : 'dark')
+  }
 
   return (
     <div className="fixed top-3 right-3 z-50 flex flex-col items-end gap-2">
@@ -62,6 +79,36 @@ export function BackgroundSwitcher({ currentThemeId, onThemeChange }: Background
               </button>
             ))}
           </div>
+
+          {/* Dark mode toggle */}
+          <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between gap-3">
+            <label
+              htmlFor="dark-mode-toggle"
+              className="text-white/60 text-xs font-mono cursor-pointer select-none"
+            >
+              Dark mode
+              {colorModePreference === 'system' && (
+                <span className="text-white/30 ml-1">(system)</span>
+              )}
+            </label>
+            <button
+              id="dark-mode-toggle"
+              role="switch"
+              aria-checked={isDark}
+              aria-label="Toggle dark mode"
+              onClick={handleDarkModeToggle}
+              className={`relative inline-flex h-5 w-9 flex-shrink-0 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
+                isDark ? 'bg-green-500/70' : 'bg-white/25'
+              }`}
+            >
+              <span
+                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${
+                  isDark ? 'translate-x-5' : 'translate-x-0.5'
+                }`}
+              />
+            </button>
+          </div>
+
           <div className="mt-2 pt-2 border-t border-white/10">
             <button
               onClick={() => {

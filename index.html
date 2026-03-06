@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GIT GUD GET ROFLBOX</title>
+    <!-- FOUC prevention: apply color-mode before React hydrates -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem('roflbox.colorMode');
+        var mode =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        document.documentElement.setAttribute('data-color-mode', mode);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
