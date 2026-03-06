@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { BG_THEMES, type BgTheme } from '@/lib/themes'
+import { useTutorial } from '@/lib/tutorial'
 
 interface BackgroundSwitcherProps {
   currentThemeId: string
@@ -9,6 +10,7 @@ interface BackgroundSwitcherProps {
 
 export function BackgroundSwitcher({ currentThemeId, onThemeChange }: BackgroundSwitcherProps) {
   const [open, setOpen] = useState(false)
+  const { start: startTutorial, completed: tutorialCompleted } = useTutorial()
 
   return (
     <div className="fixed top-3 right-3 z-50 flex flex-col items-end gap-2">
@@ -61,6 +63,17 @@ export function BackgroundSwitcher({ currentThemeId, onThemeChange }: Background
             ))}
           </div>
           <div className="mt-2 pt-2 border-t border-white/10">
+            <button
+              onClick={() => {
+                setOpen(false)
+                startTutorial()
+              }}
+              className="text-green-400/80 text-xs font-mono hover:text-green-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-400/50 w-full text-left py-0.5 transition-colors"
+            >
+              {tutorialCompleted ? '▶ Tutorial (replay)' : '▶ Start tutorial'}
+            </button>
+          </div>
+          <div className="mt-1 pt-1 border-t border-white/10">
             <button
               onClick={() => setOpen(false)}
               className="text-white/40 text-xs font-mono hover:text-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 w-full text-right"
