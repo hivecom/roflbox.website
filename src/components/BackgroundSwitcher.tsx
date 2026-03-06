@@ -22,13 +22,6 @@ export function BackgroundSwitcher({
   const [open, setOpen] = useState(false)
   const { start: startTutorial, completed: tutorialCompleted } = useTutorial()
 
-  const isDark = resolvedColorMode === 'dark'
-
-  const handleDarkModeToggle = () => {
-    // Clicking the toggle sets an explicit light/dark preference (overrides system).
-    onColorModeChange(isDark ? 'light' : 'dark')
-  }
-
   return (
     <div className="fixed top-3 right-3 z-50 flex flex-col items-end gap-2">
       <Button
@@ -80,33 +73,40 @@ export function BackgroundSwitcher({
             ))}
           </div>
 
-          {/* Dark mode toggle */}
-          <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between gap-3">
-            <label
-              htmlFor="dark-mode-toggle"
-              className="text-white/60 text-xs font-mono cursor-pointer select-none"
+          {/* Color mode selector */}
+          <div className="mt-2 pt-2 border-t border-white/10">
+            <div className="text-white/40 font-mono text-xs mb-1.5 tracking-wider">COLOR MODE:</div>
+            <div
+              role="radiogroup"
+              aria-label="Color mode"
+              className="flex gap-1"
             >
-              Dark mode
-              {colorModePreference === 'system' && (
-                <span className="text-white/30 ml-1">(system)</span>
-              )}
-            </label>
-            <button
-              id="dark-mode-toggle"
-              role="switch"
-              aria-checked={isDark}
-              aria-label="Toggle dark mode"
-              onClick={handleDarkModeToggle}
-              className={`relative inline-flex h-5 w-9 flex-shrink-0 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
-                isDark ? 'bg-green-500/70' : 'bg-white/25'
-              }`}
-            >
-              <span
-                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${
-                  isDark ? 'translate-x-5' : 'translate-x-0.5'
-                }`}
-              />
-            </button>
+              {(['system', 'light', 'dark'] as const).map((pref) => {
+                const labels = { system: 'System', light: 'Light', dark: 'Dark' }
+                const isSelected = colorModePreference === pref
+                return (
+                  <button
+                    key={pref}
+                    role="radio"
+                    aria-checked={isSelected}
+                    aria-label={`${labels[pref]} color mode${pref === 'system' ? ` (currently ${resolvedColorMode})` : ''}`}
+                    onClick={() => onColorModeChange(pref)}
+                    className={`flex-1 text-xs font-mono py-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${
+                      isSelected
+                        ? 'bg-white/25 text-white border border-white/40'
+                        : 'text-white/50 hover:text-white/80 hover:bg-white/10 border border-transparent'
+                    }`}
+                  >
+                    {labels[pref]}
+                  </button>
+                )
+              })}
+            </div>
+            {colorModePreference === 'system' && (
+              <div className="text-white/30 font-mono text-xs mt-1">
+                effective: {resolvedColorMode}
+              </div>
+            )}
           </div>
 
           <div className="mt-2 pt-2 border-t border-white/10">

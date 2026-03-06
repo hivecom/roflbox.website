@@ -8,14 +8,21 @@
     <!-- FOUC prevention: apply color-mode before React hydrates -->
     <script>
       (function () {
-        var saved = localStorage.getItem('roflbox.colorMode');
-        var mode =
-          saved === 'light' || saved === 'dark'
-            ? saved
-            : window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? 'dark'
-            : 'light';
-        document.documentElement.setAttribute('data-color-mode', mode);
+        try {
+          var saved = localStorage.getItem('roflbox.colorMode');
+          var mode;
+          if (saved === 'light' || saved === 'dark') {
+            mode = saved;
+          } else if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            mode = 'dark';
+          } else {
+            mode = 'light';
+          }
+          document.documentElement.setAttribute('data-color-mode', mode);
+        } catch (e) {
+          // If localStorage or matchMedia are unavailable, leave the attribute unset
+          // (CSS :root defaults apply).
+        }
       })();
     </script>
   </head>
