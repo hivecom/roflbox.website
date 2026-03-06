@@ -15,9 +15,9 @@ function HeroTutorialCTA() {
   return (
     <button
       onClick={startTutorial}
-      className="text-sm font-mono text-green-400 hover:text-green-300 border border-green-400/40 hover:border-green-400 rounded px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 bg-black/40"
+      className="text-xs font-mono text-white/50 hover:text-white/75 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:rounded"
     >
-      {tutorialCompleted ? '▶ Replay tutorial' : '▶ Start tutorial'}
+      {tutorialCompleted ? '▶ replay tutorial' : '▶ start tutorial'}
     </button>
   )
 }
