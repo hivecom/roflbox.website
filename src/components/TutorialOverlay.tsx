@@ -144,24 +144,44 @@ export function TutorialOverlay() {
     calloutLeft = vw / 2 - cw / 2
   }
 
+  // Clamp callout within viewport so it never overflows on mobile
+  calloutTop = Math.max(8, Math.min(calloutTop, vh - CALLOUT_EST_HEIGHT - 8))
+  calloutLeft = Math.max(8, Math.min(calloutLeft, vw - cw - 8))
+
   return (
     <>
-      {/* Dim backdrop via box-shadow on spotlight box */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: rect ? hlTop : 0,
-          left: rect ? hlLeft : 0,
-          width: rect ? hlWidth : '100%',
-          height: rect ? hlHeight : '100%',
-          borderRadius: 8,
-          boxShadow: '0 0 0 9999px rgba(0,0,0,0.78)',
-          border: rect ? '2px solid #00ff41' : 'none',
-          zIndex: 9998,
-          pointerEvents: 'none',
-        }}
-      />
+      {/* Full-screen dim backdrop — always present */}
+      {!rect && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.78)',
+            zIndex: 9997,
+            pointerEvents: 'none',
+          }}
+        />
+      )}
+
+      {/* Spotlight via box-shadow — only when target element is found */}
+      {rect && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            top: hlTop,
+            left: hlLeft,
+            width: hlWidth,
+            height: hlHeight,
+            borderRadius: 8,
+            boxShadow: '0 0 0 9999px rgba(0,0,0,0.78)',
+            border: '2px solid #00ff41',
+            zIndex: 9998,
+            pointerEvents: 'none',
+          }}
+        />
+      )}
 
       {/* Callout dialog */}
       <div
@@ -214,7 +234,7 @@ export function TutorialOverlay() {
           <button
             ref={firstFocusableRef}
             onClick={close}
-            className="text-xs text-white/40 hover:text-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 px-1 py-1 rounded transition-colors"
+            className="text-xs text-white/50 hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:rounded px-1 py-1 rounded transition-colors"
           >
             [skip]
           </button>
@@ -223,7 +243,7 @@ export function TutorialOverlay() {
             {!isFirst && (
               <button
                 onClick={back}
-                className="text-xs px-3 py-1.5 rounded border border-white/20 text-white/70 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 transition-colors"
+                className="text-xs px-3 py-1.5 rounded border border-white/30 text-white/80 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-colors"
               >
                 ← Back
               </button>
@@ -231,14 +251,14 @@ export function TutorialOverlay() {
             {!isLast ? (
               <button
                 onClick={next}
-                className="text-xs px-3 py-1.5 rounded bg-green-700 hover:bg-green-600 text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-400 transition-colors font-bold"
+                className="text-xs px-3 py-1.5 rounded bg-green-700 hover:bg-green-600 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 transition-colors font-bold"
               >
                 Next →
               </button>
             ) : (
               <button
                 onClick={finish}
-                className="text-xs px-3 py-1.5 rounded bg-green-700 hover:bg-green-600 text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-green-400 transition-colors font-bold"
+                className="text-xs px-3 py-1.5 rounded bg-green-700 hover:bg-green-600 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 transition-colors font-bold"
               >
                 Finish ✓
               </button>
