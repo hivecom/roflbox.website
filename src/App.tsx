@@ -5,8 +5,22 @@ import { BackgroundSwitcher } from '@/components/BackgroundSwitcher'
 import { BG_THEMES, DEFAULT_THEME_ID, type BgTheme } from '@/lib/themes'
 import { TutorialProvider } from '@/components/TutorialProvider'
 import { TutorialOverlay } from '@/components/TutorialOverlay'
+import { useTutorial } from '@/lib/tutorial'
 
 const STORAGE_KEY = 'roflbox-bg-theme'
+
+/** Secondary hero-level tutorial CTA — must live inside TutorialProvider */
+function HeroTutorialCTA() {
+  const { start: startTutorial, completed: tutorialCompleted } = useTutorial()
+  return (
+    <button
+      onClick={startTutorial}
+      className="text-sm font-mono text-green-400 hover:text-green-300 border border-green-400/40 hover:border-green-400 rounded px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 bg-black/40"
+    >
+      {tutorialCompleted ? '▶ Replay tutorial' : '▶ Start tutorial'}
+    </button>
+  )
+}
 
 function App() {
   const [count, setCount] = useState(0)
@@ -223,6 +237,10 @@ function App() {
             >
               💰 BUY PREMIUM 💰
             </Button>
+          </div>
+          {/* Visible tutorial CTA below the main hero buttons */}
+          <div className="mt-4 flex justify-center">
+            <HeroTutorialCTA />
           </div>
         </div>
 
