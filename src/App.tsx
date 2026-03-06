@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { BackgroundSwitcher } from '@/components/BackgroundSwitcher'
+import { BG_THEMES, DEFAULT_THEME_ID, type BgTheme } from '@/lib/themes'
+
+const STORAGE_KEY = 'roflbox-bg-theme'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,6 +12,25 @@ function App() {
   const [isBlinking, setIsBlinking] = useState(false)
   const [matrixText, setMatrixText] = useState('INITIALIZING...')
   const [chaosMode, setChaosMode] = useState(false)
+
+  // Background theme state – persisted in localStorage
+  const [currentTheme, setCurrentTheme] = useState<BgTheme>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    return BG_THEMES.find(t => t.id === saved) ?? BG_THEMES.find(t => t.id === DEFAULT_THEME_ID) ?? BG_THEMES[0]
+  })
+
+  // Apply data-bg-theme attribute to <html> and keep it in sync
+  useEffect(() => {
+    document.documentElement.setAttribute('data-bg-theme', currentTheme.id)
+    return () => {
+      document.documentElement.removeAttribute('data-bg-theme')
+    }
+  }, [currentTheme.id])
+
+  const handleThemeChange = (theme: BgTheme) => {
+    setCurrentTheme(theme)
+    localStorage.setItem(STORAGE_KEY, theme.id)
+  }
 
   // Function to download fake zip file
   const downloadFakeZip = () => {
@@ -57,7 +80,12 @@ function App() {
   }, [])
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-fuchsia-500 via-lime-400 to-orange-600 flex flex-col items-center justify-start p-4 relative ${chaosClass('perspective-crazy')}`} style={{overflow: 'visible'}}>
+    <div
+      className={`min-h-screen flex flex-col items-center justify-start p-4 relative ${chaosClass('perspective-crazy')}`}
+      style={{ overflow: 'visible', background: currentTheme.value }}
+    >
+      {/* Background theme switcher */}
+      <BackgroundSwitcher currentThemeId={currentTheme.id} onThemeChange={handleThemeChange} />
       
       {/* FLOATING CHAOS - ABSOLUTE POSITIONED MADNESS - Only in chaos mode */}
       {chaosMode && (
