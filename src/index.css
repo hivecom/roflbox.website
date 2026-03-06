@@ -58,6 +58,48 @@
   }
 }
 
+/* =====================================================================
+   Hacker Green theme tokens
+   Applied when [data-bg-theme="hacker-green"] is set on <html>.
+   Overrides Shadcn/Tailwind design-system HSL variables so that
+   primary, accent, ring, border, and card all match the hacker palette.
+   ===================================================================== */
+[data-bg-theme="hacker-green"] {
+  --primary: 120 90% 38%;          /* neon-ish green for default buttons  */
+  --primary-foreground: 120 100% 4%; /* near-black text on green buttons   */
+  --accent: 120 100% 50%;           /* bright neon green accent            */
+  --accent-foreground: 120 100% 4%; /* near-black text on accent           */
+  --secondary: 120 60% 15%;         /* muted dark green secondary          */
+  --secondary-foreground: 120 80% 75%; /* light green text on secondary    */
+  --muted: 120 40% 12%;
+  --muted-foreground: 120 60% 60%;
+  --border: 120 60% 22%;
+  --input: 120 50% 10%;
+  --ring: 120 100% 45%;             /* neon green focus ring               */
+  --foreground: 120 80% 80%;        /* light green page text               */
+  --card: 120 50% 6%;               /* very dark green card background     */
+  --card-foreground: 120 80% 80%;
+  --popover: 120 50% 6%;
+  --popover-foreground: 120 80% 80%;
+  --background: 120 60% 3%;         /* near-black with slight green tint   */
+  /* Keep destructive unchanged so error states remain red */
+}
+
+/* Additional hacker-green convenience classes for the BG toggle button
+   and any theme-specific overrides beyond the design-system tokens.    */
+[data-bg-theme="hacker-green"] a {
+  color: hsl(120 100% 55%);
+}
+[data-bg-theme="hacker-green"] a:hover {
+  color: hsl(120 100% 70%);
+}
+
+/* Visible focus ring on dark hacker background */
+[data-bg-theme="hacker-green"] :focus-visible {
+  outline: 2px solid hsl(120 100% 45%);
+  outline-offset: 2px;
+}
+
 @layer utilities {
   .border-rainbow {
     border-image: linear-gradient(45deg, #ff00ff, #00ff00, #ff8000, #ffff00, #00ffff, #ff0080, #8000ff, #ff00ff) 1;
