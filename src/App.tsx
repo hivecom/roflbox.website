@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { BackgroundSwitcher } from '@/components/BackgroundSwitcher'
 import { BG_THEMES, DEFAULT_THEME_ID, type BgTheme } from '@/lib/themes'
+import { TutorialProvider } from '@/components/TutorialProvider'
+import { TutorialOverlay } from '@/components/TutorialOverlay'
 
 const STORAGE_KEY = 'roflbox-bg-theme'
 
@@ -80,12 +82,14 @@ function App() {
   }, [])
 
   return (
-    <div
-      className={`min-h-screen flex flex-col items-center justify-start p-4 relative ${chaosClass('perspective-crazy')}`}
-      style={{ overflow: 'visible', background: currentTheme.value }}
-    >
-      {/* Background theme switcher */}
-      <BackgroundSwitcher currentThemeId={currentTheme.id} onThemeChange={handleThemeChange} />
+    <TutorialProvider>
+      <TutorialOverlay />
+      <div
+        className={`min-h-screen flex flex-col items-center justify-start p-4 relative ${chaosClass('perspective-crazy')}`}
+        style={{ overflow: 'visible', background: currentTheme.value }}
+      >
+        {/* Background theme switcher */}
+        <BackgroundSwitcher currentThemeId={currentTheme.id} onThemeChange={handleThemeChange} />
       
       {/* FLOATING CHAOS - ABSOLUTE POSITIONED MADNESS - Only in chaos mode */}
       {chaosMode && (
@@ -171,7 +175,7 @@ function App() {
 
       <div className="max-w-6xl mx-auto text-center">
         {/* Obnoxious Header - Conditional chaos */}
-        <div className="mb-8 perspective-crazy">
+        <div id="tutorial-hero" className="mb-8 perspective-crazy">
           <div className={`text-6xl md:text-9xl font-black mb-4 transition-all duration-300 ${chaosClass('hover-fly animate-wobble-crazy')} ${isBlinking ? 'text-red-500 scale-110 animate-shake-violent' : 'text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-yellow-300 to-red-500'}`}>
             <span className={`font-mono tracking-wider drop-shadow-lg ${chaosClass('hover-explode rotate-3d-crazy')}`} style={{fontFamily: 'Comic Sans MS, cursive'}}>R</span>
             <span className={`font-serif italic ${chaosClass('animate-rainbow-spin')}`}>O</span>
@@ -223,7 +227,7 @@ function App() {
         </div>
 
         {/* Fake Hacking Terminal - Conditional chaos */}
-        <Card className={`max-w-2xl mx-auto mb-8 bg-black border-2 border-green-400 ${chaosClass('animate-wobble-crazy hover-explode rotate-3d-crazy')}`} style={{transform: chaosMode ? 'perspective(400px) rotateY(10deg)' : 'none'}}>
+        <Card id="tutorial-terminal" className={`max-w-2xl mx-auto mb-8 bg-black border-2 border-green-400 ${chaosClass('animate-wobble-crazy hover-explode rotate-3d-crazy')}`} style={{transform: chaosMode ? 'perspective(400px) rotateY(10deg)' : 'none'}}>
           <CardHeader className={chaosClass('animate-shake-violent')}>
             <CardTitle className={`text-green-400 font-mono ${chaosClass('animate-text-crazy hover-fly')}`} style={{fontFamily: 'Comic Sans MS, cursive'}}>
               🖥️ ELITE HACKER TERMINAL 9000™ 🖥️
@@ -246,7 +250,7 @@ function App() {
         </Card>
 
         {/* Ridiculous Counter - Conditional chaos */}
-        <Card className={`max-w-md mx-auto mb-8 border-4 border-rainbow animate-pulse ${chaosClass('hover-explode rotate-3d-crazy animate-float-diagonal')}`} style={{background: 'linear-gradient(45deg, #ff00ff, #00ff00, #ff8000, #ffff00)', transform: chaosMode ? 'skew(-5deg) perspective(200px) rotateX(15deg)' : 'skew(-2deg)'}}>
+        <Card id="tutorial-counter" className={`max-w-md mx-auto mb-8 border-4 border-rainbow animate-pulse ${chaosClass('hover-explode rotate-3d-crazy animate-float-diagonal')}`} style={{background: 'linear-gradient(45deg, #ff00ff, #00ff00, #ff8000, #ffff00)', transform: chaosMode ? 'skew(-5deg) perspective(200px) rotateX(15deg)' : 'skew(-2deg)'}}>
           <CardHeader className={chaosClass('animate-shake-violent')}>
             <CardTitle className={`text-2xl font-mono text-red-500 ${chaosClass('animate-blink-seizure hover-fly')}`} style={{fontFamily: 'Comic Sans MS, cursive', textShadow: '0 0 10px #ff0000, 0 0 20px #ff0000'}}>
               💥 SKILL COUNTER 3000™ 💥
@@ -293,7 +297,7 @@ function App() {
         </Card>
 
         {/* Fake Features - Conditional chaos */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8 perspective-crazy">
+        <div id="tutorial-features" className="grid md:grid-cols-3 gap-6 mb-8 perspective-crazy">
           <Card className={`border-2 border-red-500 bg-red-950/50 transform rotate-1 ${chaosClass('hover-explode animate-wobble-crazy')}`} style={{overflow: 'visible', boxShadow: '0 0 30px #ff0000'}}>
             <CardHeader className={chaosClass('animate-shake-violent')}>
               <CardTitle className={`text-red-400 font-mono ${chaosClass('animate-blink-seizure hover-fly')}`} style={{fontFamily: 'Comic Sans MS, cursive', fontSize: '1.5em'}}>🔥 AIMBOT 9000 🔥</CardTitle>
@@ -323,7 +327,7 @@ function App() {
         </div>
 
         {/* Testimonials - Conditional chaos */}
-        <Card className={`mb-8 border-4 border-dashed border-pink-500 bg-gradient-to-r from-pink-950/50 to-blue-950/50 ${chaosClass('animate-wobble-crazy hover-explode rotate-3d-crazy')}`} style={{overflow: 'visible', transform: chaosMode ? 'perspective(300px) rotateY(-10deg) skew(5deg)' : 'skew(2deg)'}}>
+        <Card id="tutorial-testimonials" className={`mb-8 border-4 border-dashed border-pink-500 bg-gradient-to-r from-pink-950/50 to-blue-950/50 ${chaosClass('animate-wobble-crazy hover-explode rotate-3d-crazy')}`} style={{overflow: 'visible', transform: chaosMode ? 'perspective(300px) rotateY(-10deg) skew(5deg)' : 'skew(2deg)'}}>
           <CardHeader className={chaosClass('animate-shake-violent')}>
             <CardTitle className={`text-3xl font-mono text-pink-400 ${chaosClass('animate-text-crazy hover-fly')}`} style={{fontFamily: 'Comic Sans MS, cursive', textShadow: '0 0 15px #ff69b4'}}>
               💬 TESTIMONIALS FROM PROS 💬
@@ -357,6 +361,7 @@ function App() {
       )}
       
     </div>
+    </TutorialProvider>
   )
 }
 
